@@ -25,8 +25,9 @@ class Emails extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email', 'required'),
-			array('email', 'length', 'max'=>50),
+			array('email', 'required', 'message'=>'Пожалуйста введите ваш E-Mail.'),
+			array('email', 'length', 'max'=>50, 'message'=>'E-Mail слишком длинный.'),
+			array('email', 'email', 'message'=>'Пожалуйста введите корректный E-Mail.'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, email', 'safe', 'on'=>'search'),

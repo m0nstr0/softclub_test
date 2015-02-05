@@ -48,10 +48,14 @@ class SiteController extends Controller
 	        $model->attributes=$_POST['Emails'];
 	        if($model->validate())
 	        {
-	            // form inputs are valid, do something here
+	        	if(is_null(Emails::model()->findByAttributes(array('email' => $model->email))))
+	           		$model->save();
+	           
+	            $this->render('subscribe_done',array('model'=>$model));
 	            return;
 	        }
 	    }
+
 	    $this->render('subscribe',array('model'=>$model));
 	}
 
