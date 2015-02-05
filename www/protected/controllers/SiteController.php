@@ -25,11 +25,34 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex()
+	/*public function actionIndex()
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('index');
+	}*/
+
+	public function actionIndex()
+	{
+	    $model=new Emails;
+
+	    // uncomment the following code to enable ajax-based validation
+	    if(isset($_POST['ajax']) && $_POST['ajax']==='emails-subscribe-form')
+	    {
+	        echo CActiveForm::validate($model);
+	        Yii::app()->end();
+	    }
+
+	    if(isset($_POST['Emails']))
+	    {
+	        $model->attributes=$_POST['Emails'];
+	        if($model->validate())
+	        {
+	            // form inputs are valid, do something here
+	            return;
+	        }
+	    }
+	    $this->render('subscribe',array('model'=>$model));
 	}
 
 	/**
